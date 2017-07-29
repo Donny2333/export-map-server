@@ -1,0 +1,25 @@
+{
+  "name": "export-map",
+  "authors": [
+    "Donny <1021001390@qq.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ol4": "ol4-bower#^4.1.0",
+    "bootstrap": "^3.3.7",
+    "angular-bootstrap": "^2.5.0",
+    "lodash": "^4.17.4",
+    "angular-ui-router": "ui-router#^0.4.2",
+    "angular-bootstrap-colorpicker": "^3.0.31",
+    "layer": "^3.0.3",
+    "bootstrap-table": "^1.11.1",
+    "zTree": "^3.5.29"
+  }
+}

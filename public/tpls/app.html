@@ -1,0 +1,60 @@
+<div class="head">
+    <img src="./images/cloud.png">
+    <h2 class="title">门户网站<span>-公众版</span></h2>
+    <span>{{vm.doc.name || "新建地图"}}</span>
+</div>
+<div class="navi">
+    <ul class="menu">
+        <li class="menu-item" ng-repeat="menu in vm.menus as menus" ui-sref="{{menu.sref}}" ui-sref-active="active"
+            ng-click="go($event, menu)">
+            <img ng-src="{{menu.img}}">
+            <span>{{menu.name}}</span>
+        </li>
+    </ul>
+    <div class="method">
+        <a id="createOrClose" ng-click="createOrClose()" class="btn-blue">{{vm.doc.docId ? '关闭文档' : '新建地图'}}</a>
+        <!--<a ng-click="save()" ng-if="vm.doc.docId" class="btn-blue">保存</a>-->
+        <a ng-click="plot()" ng-if="vm.doc.docId" class="btn-blue">一键出图</a>
+        <a ng-click="publish()" ng-if="vm.doc.docId" class="btn-blue">发布</a>
+    </div>
+</div>
+<div class="main">
+    <div class="main-container">
+        <div class="side-menu">
+            <ui-view class="left-menu"></ui-view>
+        </div>
+        <div class="map-container">
+            <div class="map-content">
+                <div class="map-divide">
+                    <div id="map" class="map"></div>
+                </div>
+                <div class="layer-table" ng-if="vm.showTable">
+                    <div class="table-container">
+                        <div class="table-content">
+                            <div class="table-head">
+                                <span>{{vm.table.head}}</span>
+                                <div class="table-pagination">
+                                    <ul uib-pagination class="pagination-sm data-pagination"
+                                        total-items="vm.pagination.totalItems" items-per-page="vm.pagination.pageSize"
+                                        ng-model="vm.pagination.pageNo" max-size="vm.pagination.maxSize"
+                                        ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;"></ul>
+                                </div>
+                                <i class="icon-close table-close" ng-click="closeTable()"></i>
+                            </div>
+                            <div class="table-body">
+                                <table border="1">
+                                    <tr class="table-key">
+                                        <th ng-repeat="(key, value) in vm.table.data[0].att">{{key}}</th>
+                                    </tr>
+                                    <tr class="table-value" ng-repeat="item in vm.table.data" ng-click="select(item)">
+                                        <td ng-repeat="(key, value) in item.att">{{value}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="query-panel">
+    <div class="query-title">
+        <span class="title">{{vm.overlay.title || '查询图层'}}</span>
+    </div>
+    <div class="query-body">
+        <div class="query-param">
+            <div class="query-key">
+                <span class="title">字段名：</span>
+                <div class="list-group">
+                    <button type="button" class="list-group-item" ng-class="{active: d === vm.overlay.select}"
+                            ng-repeat="d in vm.overlay.field" ng-click="select(d)">
+                        {{d.value}}
+                    </button>
+                </div>
+            </div>
+            <div>
+                <span class="title">符号与数值：</span>
+                <div class="query-operator-value">
+                    <div class="query-operator">
+                        <button class="btn btn-default" ng-repeat="d in vm.overlay.operator" ng-click="add(d.value)">
+                            {{d.value}}
+                        </button>
+                    </div>
+                    <div class="query-value">
+                        <div class="list-group">
+                            <button type="button" class="list-group-item" ng-repeat="d in vm.overlay.param"
+                                    ng-click="add(d.value)">
+                                {{d.value}}
+                            </button>
+                        </div>
+                        <div class="query-btn" style="display: flex;align-items: center">
+                            <button class="btn btn-success" ng-click="getValues()">取值</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="query-result">
+            <div class="query-string">
+                <div class="title">查询语句：</div>
+                <textarea class="query-edit" ng-model="vm.overlay.query"></textarea>
+                <button class="btn btn-success" ng-click="clear()">清空</button>
+            </div>
+            <div class="query-btn">
+                <button type="button" class="btn btn-default" ng-click="closeMask()">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="commit()">确定</button>
+            </div>
+        </div>
+    </div>
+    <i class="icon-close" ng-click="closeMask()"></i>
+</div>

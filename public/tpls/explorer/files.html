@@ -1,0 +1,17 @@
+<div class="file-page">
+    <ul class="data-list">
+        <li class="data-item data-img" ng-repeat="t in vm.mapDoc">
+            <div class="data-img"><img ng-src="{{t.img}}" height="48"></div>
+            <div class="data-info">
+                <div class="data-name">{{t.title}}</div>
+                <div class="data-src">{{t.author}}</div>
+            </div>
+            <button class="btn btn-default" ng-click="preview(t)">查看</button>
+            <button class="btn btn-default" ng-click="deleteMap(t)">删除</button>
+        </li>
+    </ul>
+    <ul uib-pagination class="pagination-sm data-pagination" total-items="vm.pagination.totalItems"
+        items-per-page="vm.pagination.pageSize" ng-model="vm.pagination.pageNo"
+        max-size="vm.pagination.maxSize" ng-change="pageChanged()" previous-text="&lsaquo;"
+        next-text="&rsaquo;"></ul>
+</div>

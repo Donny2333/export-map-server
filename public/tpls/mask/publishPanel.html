@@ -1,0 +1,58 @@
+<div class="create-panel" style="height: 500px">
+    <div class="create">
+        <div class="top">
+            <h2 class="title">{{vm.overlay.title}}</h2>
+        </div>
+        <div class="content" style="padding: 20px 0 0;height: auto;">
+            <div class="myDivTable">
+                <div>
+                    <div>名称</div>
+                    <div>
+                        <input ng-model="vm.overlay.doc.publishName" type="text" placeholder="发布名称">
+                    </div>
+                </div>
+                <div>
+                    <div>昵称</div>
+                    <div>
+                        <input ng-model="vm.overlay.doc.name2" type="text" placeholder="文档昵称">
+                    </div>
+                </div>
+                <div>
+                    <div>关键字</div>
+                    <div class="btn-group" uib-dropdown>
+                        <div class="btn btn-default">
+                            {{vm.overlay.doc.tagName = vm.overlay.doc.tagName || vm.overlay.dropdown[0].name}}
+                        </div>
+                        <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                            <li role="menuitem" ng-repeat="item in vm.overlay.dropdown"
+                                ng-click="vm.overlay.doc.tagId=vm.overlay.dropdown[$index].id;vm.overlay.doc.tagName=vm.overlay.dropdown[$index].name">
+                                <a>{{item.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div>简述</div>
+                    <div>
+                        <input ng-model="vm.overlay.doc.detail" type="text" placeholder="这里是简述">
+                    </div>
+                </div>
+                <div>
+                    <div>详情</div>
+                    <div>
+                        <textarea ng-model="vm.overlay.doc.detail2" rows="3" placeholder="请输入有关文档的详情"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <button class="btn btn-primary" ng-click="publish()">发布</button>
+            <button class="btn btn-default" ng-click="closeMask()">取消</button>
+        </div>
+        <i class="icon-close" ng-click="closeMask()"></i>
+    </div>
+</div>

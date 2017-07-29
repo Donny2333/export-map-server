@@ -1,0 +1,177 @@
+<div class="unique-panel">
+    <div class="unique-title">
+        <span class="title">{{vm.overlay.title}}</span>
+    </div>
+    <ul class="nav nav-tabs">
+        <li ng-class="{active:vm.overlay.tab===0}">
+            <a data-toggle="tab" ng-click="vm.overlay.tab=0">Single</a>
+        </li>
+        <li ng-class="{active:vm.overlay.tab===1}">
+            <a data-toggle="tab" ng-click="vm.overlay.tab=1">Unique</a>
+        </li>
+    </ul>
+    <div class="tab-content clearfix">
+        <div class="tab-pane" ng-class="{active:vm.overlay.tab===0}">
+            <div class="symbol-body">
+                <div class="symbol-main">
+                    <ul class="symbol-list">
+                        <li class="symbol-item" ng-repeat="symbol in vm.overlay.data" ng-click="selectSymbol(symbol)"
+                            ng-class="{active: vm.overlay.select.Id===symbol.Id}">
+                            <img height="50" width="50" ng-src="{{symbol.SymbolPreview}}">
+                            <span class="symbol-name">{{symbol.SymbolName}}</span>
+                        </li>
+                    </ul>
+                    <div class="pagination">
+                        <ul uib-pagination class="pagination-sm" total-items="vm.overlay.pagination.totalItems"
+                            items-per-page="vm.overlay.pagination.pageSize" ng-model="vm.overlay.pagination.pageNo"
+                            max-size="vm.overlay.pagination.maxSize" ng-change="pageChanged()" previous-text="&lsaquo;"
+                            next-text="&rsaquo;"></ul>
+                    </div>
+                </div>
+                <div class="symbol-edit">
+                    <div class="preview" ng-style="{'margin-bottom':vm.overlay.select.SymbolName?'-15px':'-20px'}">
+                        <img height="50" width="50"
+                             ng-src="{{vm.overlay.select.SymbolPreview}}">
+                        <span class="symbol-name">{{vm.overlay.select.SymbolName}}</span>
+                    </div>
+                    <div class="symbol-select-input-list" ng-if="vm.overlay.select.SymbolType==='Marker Symbols'">
+                        <div class="symbol-select-input">
+                            <span>size：</span>
+                            <input type="text" ng-model="vm.overlay.select.Size">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>color：</span>
+                            <input colorpicker="rgb" type="text" ng-model="vm.overlay.select.Color"
+                                   ng-change="change(vm.overlay.select.Color, 'Color')">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>angle：</span>
+                            <input type="text" ng-model="vm.overlay.select.Angle">
+                        </div>
+                    </div>
+                    <div class="symbol-select-input-list" ng-if="vm.overlay.select.SymbolType==='Line Symbols'">
+                        <div class="symbol-select-input">
+                            <span>width：</span>
+                            <input type="text" ng-model="vm.overlay.select.Width">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>color：</span>
+                            <input colorpicker="rgb" type="text" ng-model="vm.overlay.select.Color"
+                                   ng-change="change(vm.overlay.select.Color, 'Color')">
+                        </div>
+                    </div>
+                    <div class="symbol-select-input-list" ng-if="vm.overlay.select.SymbolType==='Fill Symbols'">
+                        <div class="symbol-select-input">
+                            <span>fill：</span>
+                            <input colorpicker="rgb" type="text" ng-model="vm.overlay.select.FillColor"
+                                   ng-change="change(vm.overlay.select.FillColor, 'FillColor')">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>width：</span>
+                            <input type="text" ng-model="vm.overlay.select.OutlineWidth">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>color：</span>
+                            <input colorpicker="rgb" type="text" ng-model="vm.overlay.select.OutlineColor"
+                                   ng-change="change(vm.overlay.select.OutlineColor, 'OutlineColor')">
+                        </div>
+                    </div>
+                    <div class="symbol-buttom-group symbol-commit">
+                        <button class="btn btn-default" style="margin-right: 10px" ng-click="preview()">预览</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" ng-class="{active:vm.overlay.tab===1}">
+            <div class="unique-body1" ng-class="{swipe: vm.overlay.swipe}">
+                <div class="table-body">
+                    <my-table menus="vm.overlay.menus" data="vm.overlay.uniqueList" columns="vm.overlay.columns"
+                              field="vm.overlay.field" table="vm.overlay.table" ng-check-all="checkALl"
+                              ng-delete="delete" ng-delete-all="deleteAll"></my-table>
+                </div>
+            </div>
+            <div class="unique-body2 symbol-body" ng-class="{swipe: vm.overlay.swipe}">
+                <div class="symbol-main">
+                    <ul class="symbol-list">
+                        <li class="symbol-item" ng-repeat="symbol in vm.overlay.data"
+                            ng-click="selectSymbol(symbol)" ng-class="{active: vm.overlay.select.Id===symbol.Id}">
+                            <img height="50" width="50" ng-src="{{symbol.SymbolPreview}}">
+                            <span class="symbol-name">{{symbol.SymbolName}}</span>
+                        </li>
+                    </ul>
+                    <div class="pagination">
+                        <ul uib-pagination class="pagination-sm" total-items="vm.overlay.pagination.totalItems"
+                            items-per-page="vm.overlay.pagination.pageSize" ng-model="vm.overlay.pagination.pageNo"
+                            max-size="vm.overlay.pagination.maxSize" ng-change="pageChanged()"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;"></ul>
+                    </div>
+                </div>
+                <div class="symbol-edit">
+                    <div class="preview" ng-style="{'margin-bottom':vm.overlay.select.SymbolName?'-15px':'-20px'}">
+                        <img height="50" width="50" ng-src="{{vm.overlay.select.SymbolPreview}}">
+                        <span class="symbol-name">{{vm.overlay.select.SymbolName}}</span>
+                    </div>
+                    <div class="symbol-select-input-list" ng-if="vm.overlay.select.SymbolType==='Marker Symbols'">
+                        <div class="symbol-select-input">
+                            <span>size：</span>
+                            <input type="text" ng-model="vm.overlay.select.Size">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>color：</span>
+                            <input colorpicker="rgb" type="text" ng-model="vm.overlay.select.Color"
+                                   ng-change="change(vm.overlay.select.Color, 'Color')">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>angle：</span>
+                            <input type="text" ng-model="vm.overlay.select.Angle">
+                        </div>
+                    </div>
+                    <div class="symbol-select-input-list" ng-if="vm.overlay.select.SymbolType==='Line Symbols'">
+                        <div class="symbol-select-input">
+                            <span>width：</span>
+                            <input type="text" ng-model="vm.overlay.select.Width">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>color：</span>
+                            <input colorpicker="rgb" type="text" ng-model="vm.overlay.select.Color"
+                                   ng-change="change(vm.overlay.select.Color, 'Color')">
+                        </div>
+                    </div>
+                    <div class="symbol-select-input-list" ng-if="vm.overlay.select.SymbolType==='Fill Symbols'">
+                        <div class="symbol-select-input">
+                            <span>fill：</span>
+                            <input colorpicker="rgb" type="text" ng-model="vm.overlay.select.FillColor"
+                                   ng-change="change(vm.overlay.select.FillColor, 'FillColor')">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>width：</span>
+                            <input type="text" ng-model="vm.overlay.select.OutlineWidth">
+                        </div>
+                        <div class="symbol-select-input">
+                            <span>color：</span>
+                            <input colorpicker="rgb" type="text" ng-model="vm.overlay.select.OutlineColor"
+                                   ng-change="change(vm.overlay.select.OutlineColor, 'OutlineColor')">
+                        </div>
+                    </div>
+                    <div class="symbol-buttom-group symbol-commit">
+                        <button class="btn btn-default" style="margin-right: 10px" ng-click="preview()">预览</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="unique-bottom" ng-if="!vm.overlay.swipe">
+        <div class="btn-group">
+            <button class="btn btn-default" ng-click="commit()">设置</button>
+            <button class="btn btn-default" ng-click="closeMask()">取消</button>
+        </div>
+    </div>
+    <div class="unique-bottom2" ng-if="vm.overlay.swipe">
+        <div class="btn-group">
+            <button class="btn btn-default" ng-click="save()">保存</button>
+            <button class="btn btn-default" ng-click="vm.overlay.swipe=false">返回</button>
+        </div>
+    </div>
+    <i class="icon-close" ng-click="closeMask()"></i>
+</div>

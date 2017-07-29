@@ -1,0 +1,10 @@
+<ul class="segment">
+    <li class="segment-item" ng-click="go(segment)" ng-repeat="segment in vm.segments" ui-sref="{{segment.sref}}"
+        ui-sref-active="active">
+        <i class="icon {{segment.icon}}"></i>
+        <span>{{segment.name}}</span>
+    </li>
+</ul>
+<div class="segment-page">
+    <ui-view></ui-view>
+</div>

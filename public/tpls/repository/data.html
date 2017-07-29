@@ -1,0 +1,76 @@
+<div class="data-page">
+    <div class="row data-type">
+        <div>数据类型：</div>
+        <div class="btn-group" uib-dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-default" uib-dropdown-toggle>
+                {{vm.typeRes.data[vm.typeRes.id].text}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="single-button" style="min-width: 80px;">
+                <li ng-repeat="type in vm.typeRes.data">
+                    <a ng-click="change($index)">{{type.text}}</a>
+                </li>
+            </ul>
+        </div>
+        <a href="javascript:;" class="file btn btn-default">上传
+            <input type="file" fileread="vm.upload"/>
+            <!--<input id="File" type="file">-->
+        </a>
+    </div>
+    <!--<div class="row data-search">-->
+    <!--<div class="col-md-12">-->
+    <!--<div class="input-group">-->
+    <!--<div class="input-group-btn">-->
+    <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"-->
+    <!--aria-haspopup="true" aria-expanded="false">-->
+    <!--{{vm.keywords.data[vm.keywords.id].text}}<span class="caret"></span>-->
+    <!--</button>-->
+    <!--<ul class="dropdown-menu">-->
+    <!--<li ng-repeat="keyword in vm.keywords.data">-->
+    <!--<a ng-click="vm.keywords.id=$index">{{keyword.text}}</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--<input type="text" class="form-control" placeholder="关键词">-->
+    <!--<span class="input-group-btn">-->
+    <!--<button class="btn btn-default" type="button" ng-click="search()">搜索</button>-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <ul class="data-list">
+        <li class="data-item" ng-repeat="d in vm.data">
+            <div class="data-info">
+                <div class="data-name">{{d.Name}}</div>
+                <div class="data-src">{{d.SrcName}}</div>
+            </div>
+            <div>
+                <!--<button class="btn btn-default" ng-click="preview(d)">查看</button>-->
+                <button class="btn btn-default" ng-click="add(d)">添加</button>
+            </div>
+        </li>
+    </ul>
+    <ul uib-pagination class="pagination-sm data-pagination" total-items="vm.pagination.totalItems"
+        items-per-page="vm.pagination.pageSize" ng-model="vm.pagination.pageNo"
+        max-size="vm.pagination.maxSize" ng-change="pageChanged()" previous-text="&lsaquo;"
+        next-text="&rsaquo;"></ul>
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">添加图层</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <form>
+                <div class="form-group">
+                    <label for="InputTitle">标题</label>
+                    <input ng-model="vm.newLayer.desNames" type="text" class="form-control" id="InputTitle"
+                           placeholder="请输入图层名">
+                </div>
+                <div ng-if="vm.error" class="alert alert-danger" role="alert">{{vm.errorMsg}}</div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">确认</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </script>
+</div>

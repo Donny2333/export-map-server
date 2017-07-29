@@ -1,0 +1,82 @@
+<div class="symbol-panel">
+    <div class="symbol-title">
+        <span class="title">{{vm.overlay.title}}</span>
+    </div>
+    <div class="symbol-body">
+        <div class="symbol-main">
+            <div class="symbol-type">
+                <span>符号类型：</span>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true">
+                        {{vm.overlay.types.select.name}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" style="min-width: 100px;">
+                        <li ng-repeat="type in vm.overlay.types.data" ng-click="typeChanged(type)">
+                            <a>{{type.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="symbol-list">
+                <li class="symbol-item" ng-repeat="symbol in vm.overlay.data" ng-click="selectSymbol(symbol)"
+                    ng-class="{active: vm.overlay.select.Id===symbol.Id}">
+                    <img height="50" width="50" ng-src="{{symbol.SymbolPreview}}">
+                    <span class="symbol-name">{{symbol.SymbolName}}</span>
+                </li>
+            </ul>
+            <div class="pagination">
+                <ul uib-pagination class="pagination-sm" total-items="vm.overlay.pagination.totalItems"
+                    items-per-page="vm.overlay.pagination.pageSize" ng-model="vm.overlay.pagination.pageNo"
+                    max-size="vm.overlay.pagination.maxSize" ng-change="pageChanged()" previous-text="&lsaquo;"
+                    next-text="&rsaquo;"></ul>
+            </div>
+        </div>
+        <div class="symbol-edit">
+            <div class="preview">
+                <img height="50" width="50" ng-src="{{vm.overlay.select.SymbolPreview}}">
+                <span class="symbol-name">{{vm.overlay.select.SymbolName}}</span>
+            </div>
+            <div class="symbol-select-input-list" ng-if="vm.overlay.select.SymbolType==='Marker Symbols'">
+                <div class="symbol-select-input">
+                    <span class="key">size：</span>
+                    <span class="value">{{vm.overlay.select.Size}}</span>
+                </div>
+                <div class="symbol-select-input">
+                    <span class="key">color：</span>
+                    <span class="value">{{vm.overlay.select.Color}}</span>
+                </div>
+                <div class="symbol-select-input">
+                    <span class="key">angle：</span>
+                    <span class="value">{{vm.overlay.select.Angle}}</span>
+                </div>
+            </div>
+            <div class="symbol-select-input-list" ng-if="vm.overlay.select.SymbolType==='Line Symbols'">
+                <div class="symbol-select-input">
+                    <span class="key">width：</span>
+                    <span class="value">{{vm.overlay.select.Width}}</span>
+                </div>
+                <div class="symbol-select-input">
+                    <span class="key">color：</span>
+                    <span class="value">{{vm.overlay.select.Color}}</span>
+                </div>
+            </div>
+            <div class="symbol-select-input-list" ng-if="vm.overlay.select.SymbolType==='Fill Symbols'">
+                <div class="symbol-select-input">
+                    <span class="key">fill：</span>
+                    <span class="value">{{vm.overlay.select.FillColor}}</span>
+                </div>
+                <div class="symbol-select-input">
+                    <span class="key">width：</span>
+                    <span class="value">{{vm.overlay.select.OutlineWidth}}</span>
+                </div>
+                <div class="symbol-select-input">
+                    <span class="key">color：</span>
+                    <span class="value">{{vm.overlay.select.OutlineColor}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <i class="icon-close" ng-click="closeMask()"></i>
+</div>

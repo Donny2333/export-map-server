@@ -1,0 +1,49 @@
+<div class="content-page">
+    <ul class="layer-list">
+        <li class="layer-item layer-root" ng-repeat="layer in vm.layers" ng-class="{leaf: !layer.subLayerIds}"
+            ng-include="'layer-list.html'"></li>
+    </ul>
+
+    <script id="layer-tree.html" type="text/ng-template">
+        <ul class="layer-list">
+            <li class="layer-item" ng-repeat="layer in layer.subLayerIds" ng-class="{leaf: !layer.subLayerIds}"
+                ng-include="'layer-list.html'"></li>
+        </ul>
+    </script>
+
+    <script id="layer-list.html" type="text/ng-template">
+        <div>
+            <div class="layer-ionic" ng-show="layer.showSelf">
+                <div class="layer-expand" ng-if="layer.subLayerIds">
+                    <input id="{{'layer-ex-' + layer.id}}" class="layerExpand" type="checkbox">
+                    <label for="{{'layer-ex-' + layer.id}}" ng-click="expandLayer(layer)"></label>
+                </div>
+                <div class="layer-input">
+                    <input id="{{'layer-' + layer.id}}" class="layerCheckbox" ng-class="{halfChecked: false}"
+                           ng-model="layer.defaultVisibility" type="checkbox">
+                    <label for="{{'layer-' + layer.id}}" ng-click="hideLayer(vm.layers,layer)"
+                           ng-class="{lchecked: layer.ischeck===1, lhalfChecked: layer.ischeck===3, lunCheck: layer.ischeck===2}"></label>
+                </div>
+                <div class="layer-name">
+                    <span>{{layer.name}}</span>
+                    <div class="layer-buttons" ng-if="!layer.subLayerIds" ng-include="'layer-buttons.html'"></div>
+                </div>
+            </div>
+        </div>
+        <ul class="layer-symbol-list">
+            <li class="layer-symbol-item" ng-if="!layer.subLayerIds&&layer.showPreview"
+                ng-repeat="symbol in layer.symbols">
+                <img class="layer-symbol" width="20" height="20" ng-src={{symbol.SymbolInfo.SymbolPreview}}>
+                <span>{{symbol.Value}}</span>
+            </li>
+        </ul>
+        <div class="layer-children" ng-if="layer.subLayerIds" ng-include="'layer-tree.html'"></div>
+    </script>
+
+    <script id="layer-buttons.html" type="text/ng-template">
+        <a class="preview-btn" ng-click="showPreview(layer)"><img src="images/legend.png"></a>
+        <a class="table-btn" ng-click="toggleTable(layer)"><img src="images/table.png"></a>
+        <a class="style-btn" ng-click="changePreview(layer)"><img src="images/style.png"></a>
+        <a class="delete-btn" ng-click="deleteLayer(layer)"><img src="images/delete.png"></a>
+    </script>
+</div>

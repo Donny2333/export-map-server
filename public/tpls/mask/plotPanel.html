@@ -1,0 +1,66 @@
+<div>
+    <div ng-if="!vm.overlay.showImg" class="plot-panel">
+        <div class="plot-title">
+            <span class="title">{{vm.overlay.title}}</span>
+        </div>
+        <div class="plot-body">
+            <div class="plot-left">
+                <ul class="plot-list">
+                    <li class="plot-item">
+                        <span class="key">标题：</span>
+                        <input ng-model="vm.overlay.plot.title" class="value" type="text">
+                    </li>
+                    <li class="plot-item">
+                        <span class="key">制图单位：</span>
+                        <input ng-model="vm.overlay.plot.org" class="value" type="text">
+                    </li>
+                    <li class="plot-item">
+                        <span class="key">制图人：</span>
+                        <input ng-model="vm.overlay.plot.author" class="value" type="text">
+                    </li>
+                    <li class="plot-item">
+                        <span class="key">图例图层：</span>
+                        <div class="value-list">
+                            <label ng-repeat="check in vm.overlay.plot.layers">
+                                <input type="checkbox" ng-model="check.checked">{{check.name}}
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="plot-right">
+                <ul class="plot-list">
+                    <li class="plot-item">
+                        <span class="key">版式：</span>
+                        <div class="radio-list">
+                            <label>
+                                <input name="plotMode" type="radio" ng-value="false"
+                                       ng-model="vm.overlay.plot.isVertical">横版
+                            </label>
+                            <label>
+                                <input name="plotMode" type="radio" ng-value="true"
+                                       ng-model="vm.overlay.plot.isVertical">竖版
+                            </label>
+                        </div>
+                    </li>
+                    <li class="plot-item">
+                        <span class="key">预览：</span>
+                        <img class="value-img" ng-class="{isVertical: vm.overlay.plot.isVertical}"
+                             ng-src="{{vm.overlay.plot.isVertical ? 'images/plot_vertical.png' : 'images/plot.png'}}">
+                    </li>
+                    <li class="plot-item btns">
+                        <div>
+                            <button class="btn btn-default" ng-click="closeMask()">取消</button>
+                            <button class="btn btn-primary" ng-click="commit()">确定</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <i class="icon-close" ng-click="closeMask()"></i>
+    </div>
+    <div ng-if="vm.overlay.showImg">
+        <img ng-src="{{vm.overlay.plot.imgUrl}}">
+        <i class="icon-close plot-close" ng-click="closeMask()"></i>
+    </div>
+</div>

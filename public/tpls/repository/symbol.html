@@ -1,0 +1,15 @@
+<div class="symbol-page">
+    <ul class="data-list">
+        <li class="data-item" ng-repeat="s in vm.symbols">
+            <div class="data-info">
+                <div class="data-name">{{s.name}}</div>
+                <div class="data-src">{{s.detail}}</div>
+            </div>
+            <button class="btn btn-default" ng-click="preview(s)">查看</button>
+        </li>
+    </ul>
+    <ul uib-pagination class="pagination-sm data-pagination" total-items="vm.pagination.totalItems"
+        items-per-page="vm.pagination.pageSize" ng-model="vm.pagination.pageNo"
+        max-size="vm.pagination.maxSize" ng-change="pageChanged()" previous-text="&lsaquo;"
+        next-text="&rsaquo;"></ul>
+</div>
